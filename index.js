@@ -3,8 +3,13 @@ const WebSocket = require('ws');
 
 const PORT = process.env.PORT || 8080;
 const INDEX = '/index.html';
+const app = express();
 
-const server = express()
+app.get('/healthcheck', function(req, res) {
+    res.send("server is working");
+});
+
+const server = app
   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
